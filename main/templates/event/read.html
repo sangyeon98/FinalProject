@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layouts/notice/layout}">
+<div layout:fragment="content" class="container my-3">
+    <h2 class="mt-4" style="display: flex; align-items: center;">
+        이벤트
+        <img src="/images/event/이벤트아이콘.png" class="icon" style="width: 70px; height: 70px; margin-right: 10px;">
+    </h2>
+    <br>
+    <br>
+    
+	  <h3 class="title" style="text-align: center; font-weight: bold; ">[[${event.eventTitle}]]</h3>
+	  <br>
+	  <br>
+        <img th:src="@{/images/event/{eventNo}.png(eventNo=${event.eventNo})}" 
+        	style=" margin: auto; display: block;">
+        
+
+        </div>
+
+</html>

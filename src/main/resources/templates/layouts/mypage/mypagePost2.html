@@ -1,0 +1,208 @@
+<div th:fragment="mppost2Fragment" class="row" style="margin: auto; width: 90%;">
+
+	<div class="card mb-3" style="max-width: 760px;">
+		<div class="row g-0">
+			<div class="col-md-4">
+				<img src="/images/프사.png" class="img-fluid rounded-start" alt="프로필">
+
+			</div>
+			<div class="col-md-8">
+				<div class="card-body">
+					<h5 class="card-title" th:text="${loggedInUser.userId} + '님 환영합니다.'"></h5>
+					<br>
+					<p class="card-text" style="font-weight: bold;" th:text="'성 명: ' + ${loggedInUser.userName}"></p>
+					<p class="card-text" style="font-weight: bold;" th:text="'연락처: ' + ${loggedInUser.userPhoneNumber}">
+					</p>
+					<p class="card-text" style="font-weight: bold;" th:text="'주 소: ' + ${loggedInUser.userAddress}"></p>
+					<br>
+					<br>
+				</div>
+			</div>
+		</div>
+
+		<div class="under-box">
+			<h3>Enjoy your TRIP</h3>
+			<br><br>
+			<a href="/event/list">
+				<img src="/images/이벤트.png" width="200" height="150" alt="이벤트">
+			</a>
+			<br>
+		</div>
+	</div>
+
+	<div id="calendar">
+		<table id=calendar>
+			<span class="year">2023</span>
+			<span class="month">7</span>
+			<thead>
+				<th class="holiday">Sunday</th>
+				<th>Monday</th>
+				<th>Tuesday</th>
+				<th>Wednesday</th>
+				<th>Thursday</th>
+				<th>Friday</th>
+				<th>Saturday</th>
+			</thead>
+			<tbody>
+				<tr>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td>1</td>
+				</tr>
+				<tr>
+					<td class="holiday">2</td>
+					<td>3</td>
+					<td>4</td>
+					<td>5</td>
+					<td>6</td>
+					<td>7 소서</td>
+					<td>8</td>
+				</tr>
+				<tr>
+					<td class="holiday">9</td>
+					<td>10</td>
+					<td>11 초복</td>
+					<td>12 정보보호의 날</td>
+					<td>13 today</td>
+					<td>14</td>
+					<td>15</td>
+				</tr>
+				<tr>
+					<td class="holiday">16</td>
+					<td id="today">17 제헌절</td>
+					<td>18</td>
+					<td>19</td>
+					<td>20</td>
+					<td>21 중복</td>
+					<td>22</td>
+				</tr>
+				<tr>
+					<td class="holiday">23 대서</td>
+					<td>24</td>
+					<td>25</td>
+					<td>26</td>
+					<td>27</td>
+					<td>28</td>
+					<td>29</td>
+				</tr>
+				<tr>
+					<td class="holiday">30</td>
+					<td>31</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+	<div>
+		<br><br>
+		<h3>여행 위시리스트</h3>
+		<hr color="skyblue" size="10px">
+
+		<div class="card-group">
+			<div class="card">
+				<img src="/images/스크랩.png" class="card-img-top">
+				<div class="card-body">
+					<p class="card-text">
+						<tr th:each="scrap : ${scrapList}">
+							<td th:text="${scrap.scrapNumber}"></td>
+							<td th:text="${scrap.place.placeTitle}"></td>
+							<td th:text="${scrap.place.placeComment}"></td>
+						</tr>
+					<p class="card-text">
+					</p>
+				</div>
+			</div>
+			<div class="card">
+				<img src="/images/스크랩2.png" class="card-img-top">
+				<div class="card-body">
+					<p class="card-text">
+						<tr th:each="scrap : ${scrapList}">
+							<td th:text="${scrap.scrapNumber}"></td>
+							<td th:text="${scrap.place.placeTitle}"></td>
+							<td th:text="${scrap.place.placeComment}"></td>
+						</tr>
+					<p class="card-text">
+					</p>
+				</div>
+			</div>
+			<div class="card">
+				<img src="/images/스크랩5.png" class="card-img-top">
+				<div class="card-body">
+					<p class="card-text">
+						<tr th:each="scrap : ${scrapList}">
+							<td th:text="${scrap.scrapNumber}"></td>
+							<td th:text="${scrap.place.placeTitle}"></td>
+							<td th:text="${scrap.place.placeComment}"></td>
+						</tr>
+					<p class="card-text">
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<div>
+		<br><br><br>
+		<h3>코스 위시리스트</h3>
+		<hr color="skyblue" size="10px">
+
+		<div class="card-group">
+			<div class="card">
+				<img src="/images/스크랩3.png" class="card-img-top">
+				<div class="card-body">
+					<h5 class="card-title">스크랩한 여행코스</h5>
+					<p class="card-text">
+						<tr th:each="course : ${courseList}">
+							<td th:text="${course.courseNo}"></td>
+							<td th:text="${course.courseTitle}"></td>
+						</tr>
+					
+					<p class="card-text">
+					</p>
+				</div>
+			</div>
+			<div class="card">
+				<img src="/images/스크랩4.png" class="card-img-top">
+				<div class="card-body">
+					<h5 class="card-title">스크랩한 여행코스</h5>
+					<p class="card-text">
+					
+						<tr th:each="course : ${courseList}">
+							<td th:text="${course.courseNo}"></td>
+							<td th:text="${course.courseTitle}"></td>
+						</tr>
+					
+					</p>
+					<p class="card-text">
+						<small class="text-body-secondary"> </small>
+					</p>
+				</div>
+			</div>
+			<!--<div class="card">
+				<img src="/images/스크랩6.png" class="card-img-top">
+				<div class="card-body">
+					<h5 class="card-title">스크랩한 여행코스</h5>
+					<p class="card-text">This is a wider card with supporting text
+						below as a natural lead-in to additional content. This card has
+						t equal height
+						action.</p>
+					<p class="card-text">
+						<small class="text-body-secondary"> </small>
+					</p>
+				</div>
+			</div>-->
+		</div>
+		<br><br>
+		<div style="display: flex; justify-content: center;">
+			<p>EZEN TRIP &copy; 2023. All rights reserved.</p>
+		</div>
+	</div>
+
+
+
+</div>

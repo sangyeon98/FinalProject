@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layouts/notice/layout}">
+ <div layout:fragment="content" class="container  my-3" >
+ <h2 class="mt-4" >문의하기
+        <span>
+            <a th:href="@{/notice/register}">
+                <button type="button" class="btn btn-outline-primary">글쓰기</button>
+            </a>
+        </span>
+    </h2>
+    <br>
+    <div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">게시물 번호</th>
+                    <th scope="col">제목</th>
+                    <th scope="col">작성자</th>
+                    <th scope="col">작성일</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="notice : ${result.dtoList}">
+                    <td th:text="${notice.noticeNo}"></td>
+                    <td>
+                        <a th:href="@{/notice/read(noticeNo = ${notice.noticeNo})}">
+                            <span th:text="${notice.noticeTitle}"></span>
+                        </a>
+                    </td>
+                    <td th:text="${notice.user?.userId}"></td>
+                    <td th:text="${#temporals.format(notice.noticeDate, 'yyyy-MM-dd')}"></td>
+                   
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <div>
+		<!-- 페이징처리 시작 -->
+	    <ul class="pagination h-100 justify-content-center align-items-center">
+	
+            <li class="page-item " th:if="${result.prev}">
+                <a class="page-link" th:href="@{/notice/list(page= ${result.start -1},
+                    type=${pageRequestDTO.type} ,
+                    keyword = ${pageRequestDTO.keyword} ) }" tabindex="-1">Previous</a>
+            </li>
+
+            <li th:class=" 'page-item ' + ${result.page == page?'active':''} " th:each="page: ${result.pageList}">
+                <a class="page-link" th:href="@{/notice/list(page = ${page} ,
+                   type=${pageRequestDTO.type} ,
+                   keyword = ${pageRequestDTO.keyword}  )}">
+                    [[${page}]]
+                </a>
+            </li>
+
+            <li class="page-item" th:if="${result.next}">
+                <a class="page-link" th:href="@{/notice/list(page= ${result.end + 1} ,
+                    type=${pageRequestDTO.type} ,
+                    keyword = ${pageRequestDTO.keyword} )}">Next</a>
+            </li>
+
+        </ul>
+  		<!-- 페이징처리 끝 -->
+  	</div>	    
+</div>
+
+</html>

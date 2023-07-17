@@ -1,0 +1,18 @@
+<div th:fragment="mpsideFragment" class="bg-light border-right" id="sidebar-wrapper"
+	style="width: 400px; height: 100vh; float: left;">
+	<br>
+	<br>
+	<div class="sidebar-heading" style="font-size: 30px; font-weight: bold; text-align: center;">마이페이지</div>
+	<div class="list-group list-group-flush">
+		<a href="/qna/list" class="list-group-item list-group-item-action bg-light"
+			style="font-size: 20px; font-weight: normal; text-align: center;">
+			추천 메뉴</a>
+		<form action="/user/delete/{userId}" method="post">
+			<input type="hidden" name="userId" value="${loggedInUser.userId}">
+			<button type="submit" class="list-group-item list-group-item-action bg-light"
+				style="font-size: 20px; font-weight: normal; text-align: center;">
+				회원 탈퇴
+			</button>
+		</form>
+	</div>
+</div>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+ <script src="https://www.amcharts.com/lib/4/core.js"></script>
+  <script src="https://www.amcharts.com/lib/4/maps.js"></script>
+  <script src="https://www.amcharts.com/lib/4/geodata/southKoreaLow.js"></script>
+<meta charset="UTF-8">
+
+<style>
+body, a {
+  cursor: url('/images/curfin.png'), auto;
+}
+
+.centered-box {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+}
+
+.centered-image {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+</style>
+
+<title>TRIP MAP</title>
+<!-- 부트스트랩 CSS 링크 -->
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
+	crossorigin="anonymous">
+
+<!-- 네비게이션 바 -->
+<nav th:replace="~{layouts/main/navbar :: navbarFragment}"></nav>
+</head>
+<body>
+
+	<div id="main-content" style="padding: 20px;">
+		<!-- 본문페이지 -->
+		<div th:replace="~{layouts/koMap/koMapPost :: koMapFragment}"></div>
+	</div>
+	<br><br>
+	<div style="display: flex; justify-content: center;">
+        <p>EZEN TRIP &copy; 2023. All rights reserved.</p>
+    </div>
+
+
+</body>
+</html>

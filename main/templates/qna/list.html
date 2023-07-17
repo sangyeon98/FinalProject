@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layouts/notice/layout}">
+  <head>  
+    <style>		
+        .messageContainer {
+            max-width: 1000px;
+            margin: 0 auto;
+/*             border: 0.8px solid lightgray;
+            border-radius: 10px;
+            padding: 30px;     */   
+        }
+
+        .message {
+            margin-bottom: 10px;
+            position: relative;
+            padding: 10px;
+            border-radius: 10px;
+            font-size: 20px;
+        }
+
+        .user-message {
+            background-color: lightblue;
+            font-size: 20px;
+            padding-top: 20px;
+            margin-bottom: 20px;
+            padding-left: 30px;
+            padding-right: 30px;
+        }
+
+        .bot-message {
+            background-color: lightgray;
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            padding-left: 30px;
+            padding-right: 30px;
+        }
+
+        .button-template {
+            margin-top: 10px;
+        }
+
+        .button {
+            display: inline-block;
+            background-color: white;
+            padding: 5px 10px;
+            margin-right: 5px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-bottom: 15px;
+        }
+
+        /* 말풍선 화살표 스타일 */
+        .message::before {
+            content: "";
+            position: absolute;
+            border-style: solid;
+            border-width: 10px 10px 10px 0;
+            border-color: transparent;
+        }
+
+        .user-message::before {
+            border-left-color: lightblue;
+            border-width: 10px 0 10px 15px;
+            right: -15px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .bot-message::before {
+            border-right-color: lightgray;
+            border-width: 10px 15px 10px 0;
+            left: -14px;     
+            top: 50%;
+            transform: translateY(-50%);
+        }
+    </style>
+</head>
+
+<body>
+<div layout:fragment="content" class="container my-3"> <!-- style="padding-left: 50px;" -->
+    <h2 class="mt-4" style="display: flex; align-items: center;">
+        자주묻는 질문
+        <img src="/images/qna/물음표.png" class="icon" style="width: 50px; height: 45px; margin-right: 10px;">
+    </h2>
+    <br><br>
+   
+    <div class="messageContainer" id="messageContainer">
+        <div class="message bot-message" style="font-weight: bolder;">
+            EZEN TRIP을 찾아주셔서 감사합니다.
+            <img src="/images/qna/임티1.png" class="icon" 
+            	style="width: 22px; height: 28px; margin-right: 10px; padding-bottom: 8px;">
+            <br>
+            무엇을 도와드릴까요?
+        </div>
+        <div class="message user-message">
+            <div class="button" style="pointer-events: none; background-color: yellow; font-weight: bolder;">
+                질문을 선택해 주세요
+                <img src="/images/qna/임티2.png" class="icon" 
+                	style="width: 22px; height: 28px; margin-right: 10px; padding-bottom: 8px;">
+            </div>
+            <div class="button-template">
+                <div class="button" onclick="getQnA('회원탈퇴 시 재가입 가능한가요?')">
+                    <img src="/images/qna/임티3.png" class="icon" 
+                    	style="width: 25px; height: 28px; margin-right: 2px; padding-bottom: 5px;">
+                    회원탈퇴 시 재가입 가능한가요?
+                </div>
+                <br>
+                <div class="button" onclick="getQnA('여행코스 찜하기는 어디에서 확인할 수 있나요?')">
+                    <img src="/images/qna/임티3.png" class="icon" 
+                    style="width: 25px; height: 28px; margin-right: 2px; padding-bottom: 5px;">
+                    여행코스 찜하기는 어디에서 확인할 수 있나요?
+                </div>
+                <br>
+                <div class="button" onclick="getQnA('이벤트 참여시 결과는 언제 받아볼 수 있나요?')">
+                    <img src="/images/qna/임티3.png" class="icon" 
+                    	style="width: 25px; height: 28px; margin-right: 2px; padding-bottom: 5px;">
+                    이벤트 참여시 결과는 언제 받아볼 수 있나요?
+                </div>
+                 <br>
+                <div class="button" onclick="getQnA('고객센터 연락시 통화가능한 시간이 언제인가요?')">
+                    <img src="/images/qna/임티3.png" class="icon" 
+                    	style="width: 25px; height: 28px; margin-right: 2px; padding-bottom: 5px;">
+                    고객센터 연락시 통화가능한 시간이 언제인가요?
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function getQnA(chatQ) {
+            fetch(`/qna/${encodeURIComponent(chatQ)}`)
+                .then(response => response.text())
+                .then(data => {
+                    const answer = document.createElement('div');
+                    answer.classList.add('message');
+                    answer.classList.add('bot-message');
+                    answer.innerHTML = ` ${data}`;
+
+                    const messageContainer = document.getElementById('messageContainer');
+                    const userMessage = messageContainer.querySelector('.user-message');
+                    const clonedUserMessage = userMessage.cloneNode(true);
+                    messageContainer.appendChild(answer);
+                    messageContainer.appendChild(clonedUserMessage);
+                })
+                .catch(error => console.error(error));
+        }
+    </script>
+    </div>
+</body>
+</html>

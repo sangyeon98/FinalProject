@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<style>
+.container {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	width: 40%
+}
+
+.item {
+	width: 25%;
+	padding: 10px;
+	box-sizing: border-box;
+}
+
+.item img {
+	width: 100%;
+	height: auto;
+}
+
+.secitem {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	width: 40%
+}
+ /* 사이드바 스타일 */
+        .sidebar {
+            width: 20%;
+            background-color: #f8f9fa;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+        
+        .sidebar ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .sidebar li {
+            margin-bottom: 5px;
+        }
+        
+        .sidebar a {
+            text-decoration: none;
+            color: #000;
+        }
+        
+        .sidebar a:hover {
+            color: #337ab7;
+        } 
+</style>
+<nav th:replace="~{layouts/main/navbar :: navbarFragment}"></nav>
+<nav th:replace="~{layouts/place/sidebar :: sidebarFragment}"></nav>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
+	crossorigin="anonymous">
+
+</head>
+<body>
+
+	<div class="container">
+	
+	 <!-- 사이드바 -->
+  <!--    <div class="sidebar" style="float: left;">
+    <ul>
+        <li th:each="list : ${result.dtoList}">
+            <a th:href="@{place/list2}" th:text="${list.city.cityName}"></a>
+        </li>
+    </ul>
+</div> -->
+
+
+<!-- <div class="item" th:each="list, iterStat : ${result.dtoList}" th:if="${iterStat.count} &lt;= 8"> -->
+<div class="item" th:each="list, iterStat : ${result.dtoList}" th:if="${iterStat.count} &lt;= 8">
+    <a th:href="@{/place/read(placeTitle=${list.placeTitle}, 
+            page=${result.page}, 
+            type=${pageRequestDTO.type}, 
+            keyword=${pageRequestDTO.keyword})}">
+        <img th:src="@{'/images/ima/' + ${list.city.cityName} + '/' + ${list.placeTitle} + ' (1).jpg'}" /> 
+    </a>
+    <p style="text-align: center; font-weight: bold;" th:text="${list.placeTitle}"></p>
+</div>
+
+
+	</div>
+
+<!-- <div class="secitem" th:each="list, iterStat : ${result2.dtoList}" th:if="${iterStat.count} &lt;= 3">
+    <img src="/images/apple.jpg" alt="New Image" style="width: 25%; padding: 10px; box-sizing: border-box">
+    <div class="caption">
+        <h3 th:text="'제목 : '+ ${list.placeTitle}">새로운 제목</h3>
+        <p th:text="'내용 : '+ ${list.placeContent}">새로운 내용</p>
+        <p th:text="'지역 : '+ ${list.city.cityName}">지역</p>
+        
+    </div>
+</div> -->
+
+	
+<div>
+		<!-- 페이징처리 시작 -->
+	    <ul class="pagination h-100 justify-content-center align-items-center">
+	
+            <li class="page-item " th:if="${result.prev}">
+                <a class="page-link" th:href="@{/place/list2(page= ${result.start -1},
+                    type=${pageRequestDTO.type} ,
+                    keyword = ${pageRequestDTO.keyword} ) }" tabindex="-1">Previous</a>
+            </li>
+
+            <li th:class=" 'page-item ' + ${result.page == page?'active':''} " th:each="page: ${result.pageList}">
+                <a class="page-link" th:href="@{/place/list2(page = ${page} ,
+                   type=${pageRequestDTO.type} ,
+                   keyword = ${pageRequestDTO.keyword}  )}">
+                    [[${page}]]
+                </a>
+            </li>
+
+            <li class="page-item" th:if="${result.next}">
+                <a class="page-link" th:href="@{/place/list2(page= ${result.end + 1} ,
+                    type=${pageRequestDTO.type} ,
+                    keyword = ${pageRequestDTO.keyword} )}">Next</a>
+            </li>
+
+        </ul>
+  		<!-- 페이징처리 끝 -->
+  	</div>	  
+
+
+
+</body>
+</html>

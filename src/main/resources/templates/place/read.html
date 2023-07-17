@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>여행지 정보</title>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+	crossorigin="anonymous"></script>
+
+<style>
+.container {
+	max-width: 600px;
+	margin: 0 auto;
+	padding: 20px;
+}
+
+.containerHead {
+	font-size: 24px;
+	font-weight: bold;
+	align-content: center;
+}
+
+.place-name {
+	font-size: 28px;
+	font-weight: bold;
+	text-align: center;
+}
+
+.location-name {
+	margin-top: 10px;
+	text-align: center;
+	font-size: 16px;
+	color: #666;
+	/* font-size: 18px;
+	text-align: center; */
+	/* color: #999; */
+}
+
+
+
+.title_comment{
+	font-size: 18px;
+	text-align: center;
+	margin-top: 10px;
+	color: black;
+}
+
+.photo {
+	margin-top: 20px;
+	text-align: center;
+}
+
+.photo img {
+	max-width: 100%;
+	height: auto;
+}
+
+.details {
+	margin-top: 20px;
+}
+
+.recommendation {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: flex-start;
+	margin-top: 20px;
+	font-weight: bold;
+}
+
+.recommendation .item {
+	width: 33.33%;
+	padding: 25px;
+	box-sizing: border-box;
+	text-align: center;
+}
+
+.recommendation .item img {
+	width: 100%;
+	height: auto;
+}
+
+.recommendation .item p {
+	margin: 0;
+}
+
+.comment {
+	border: 5px solid #ccc;
+	padding: 10px;
+	margin-bottom: 10px;
+	text-align: center;
+}
+
+.comment .content {
+	font-weight: bold;
+}
+
+.comment .user {
+	font-weight: bold;
+}
+
+button {
+	text-decoration: none;
+}
+
+
+.recomaned-text {
+    float: right;
+}
+hr {
+    background:blue;
+    height:5px;
+    
+}
+#desPlace{
+	border: 1px solid black; /* 테두리 스타일 설정 */
+    padding: 10px;
+    font-size: 20px;
+
+}
+
+
+
+textarea {
+			width: 80%;
+			height: 150px;
+			padding: 10px;
+			box-sizing: border-box;
+			border: solid 2px #1E90FF;
+			border-radius: 5px;
+			font-size: 16px;
+			resize: both;
+		}
+li{
+ font-size: 18px;
+
+}
+
+
+
+</style>
+<nav th:replace="~{layouts/main/navbar :: navbarFragment}"></nav>
+
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
+	crossorigin="anonymous">
+
+</head>
+<body>
+	<div class="container">
+		<div class="containerHead">
+			<hr>
+			<div class="place-name" id="place-name." th:text="${placeList.placeTitle}">장소 이름</div>
+			<div class="location-name" th:text="${placeList.city.cityName}">지역이름</div>
+			<div class="title_comment" th:text="${placeList.placeComment}">코멘트 내용</div>
+		</div>
+
+	<hr>
+		<div class="btn-group" role="group"
+			aria-label="Basic outlined example">
+			<button type="button" class="btn btn-outline-primary"> <a href="#carouselExampleControls">사진 </a>
+			</button>
+			<button type="button" class="btn btn-outline-primary"> <a href="#description">상세설명 </a>
+			</button>
+			<button type="button" class="btn btn-outline-primary"> <a href="#recommend">추천여행지 </a>
+			</button>
+		</div>
+		<br>
+		<hr>
+		<br> <br>
+
+
+		<div class="row" style="margin: auto; width: 80%;">
+			<div class="col">
+				<div class="container-fluid">
+					<div id="carouselExampleControls" class="carousel slide"
+						data-bs-ride="carousel">
+						<div class="carousel-inner">
+							<div class="carousel-item active" th:each="place : ${placeList}">
+								<img
+									th:src="@{'/images/ima/' + ${place.city.cityName} + '/' + ${place.placeTitle} + ' (3).jpg'}"
+									class="d-block w-100">
+							</div>
+
+							<div class="carousel-item" th:each="place : ${placeList}">
+								<img
+									th:src="@{'/images/ima/' + ${place.city.cityName} + '/' + ${place.placeTitle} + ' (2).jpg'}"
+									class="d-block w-100">
+							</div>
+
+							<div class="carousel-item" th:each="place : ${placeList}">
+								<img
+									th:src="@{'/images/ima/' + ${place.city.cityName} + '/' + ${place.placeTitle} + ' (1).jpg'}"
+									class="d-block w-100">
+							</div>
+						</div>
+
+						<button class="carousel-control-prev" type="button"
+							data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+							<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+							<span class="visually-hidden">Previous</span>
+						</button>
+						<button class="carousel-control-next" type="button"
+							data-bs-target="#carouselExampleControls" data-bs-slide="next">
+							<span class="carousel-control-next-icon" aria-hidden="true"></span>
+							<span class="visually-hidden">Next</span>
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<br>
+
+
+
+		<!-- 장소 설명 칸 -->
+		<div  id="desPlace" th:text="${placeList.placeContent}"></div>
+		<br>
+		
+		
+
+		<!-- 이거 찜하기 버튼 만들어서 js태우기  -->
+		<div class="scrap_place">
+			<input type="button" value="관심장소" onclick="scrapPlace()">
+		</div>
+
+
+		<div class="details" id="description">
+			<h3>상세 설명</h3>
+			<hr>
+			
+		</div>
+
+		<div class="row" style="margin: auto; width: 80%;">
+			<div class="col-6">
+				<table>
+					<tr>
+						<td>
+							<ul>
+								<li>가격 : <span th:text="${placeList.placePrice}"></span>
+								</li>
+								<li>전화번호 : <span th:text="${placeList.placeTel}"></span>
+								</li>
+								<li>운영시간 : <span th:text="${placeList.placeTime}"></span>
+								</li>
+
+
+							</ul>
+						</td>
+					</tr>
+				</table>
+			</div>
+			<div class="col-6">
+				<table>
+					<tr>
+						<td>
+							<ul>
+								<li>홈페이지 : <span th:text="${placeList.placeUrl}"></span>
+								</li>
+								<li>주차 : <span th:text="${placeList.placeParking}"></span>
+								</li>
+								<li>휴일 : <span th:text="${placeList.placeOff}"></span>
+								</li>
+
+							</ul>
+						</td>
+					</tr>
+				</table>
+
+			</div>
+		</div>
+		<hr>
+
+
+		<div>
+			<h3>댓글 작성</h3>
+			<form id="commentForm">
+				<div>
+					지역 : <input type="text" id="inputText" name="inputText"
+						th:value="${placeList.placeTitle}" readonly><br> ID :
+					<span th:if="${session.loggedInUser != null}"> <input
+						type="text" id="inputText2" name="inputText"
+						th:value="${session.loggedInUser.userId}" readonly><br>
+					</span> <br>
+
+					<!-- 세션에 로그인 정보가 없으면 -->
+					<a th:if="${session.loggedInUser == null}"></a>
+
+					<textarea id="content" name="content" rows="4" cols="60"></textarea>
+					<br>
+				</div>
+				<button type="submit" style="border: solid 2px #1E90FF;">댓글 작성</button>
+
+			</form>
+		</div>
+		<hr>
+		<div>
+			<h3>작성된 댓글</h3>
+		</div>
+
+
+		<!-- 댓글보이는곳 -->
+		<div id="commentList"></div>
+		<br>
+
+
+		
+		<br> <br>
+		
+		<hr>
+		<h3>추천 여행지</h3>
+		<hr>
+		
+		<div class="recommendation" id="recommend">
+
+			<div class="item" th:each="city : ${cityList}">
+				<a th:text="${city.cityName}"
+					th:href="@{/place/list3(cityName=${city.cityName})}"> <img
+					th:src="@{'/images/ima/' + ${list.city.cityName} + '/' + ${list.placeTitle} + ' (1).jpg'}" />
+				</a>
+			</div>
+		</div>
+
+		<input id="placeTitleJS" type="hidden"
+			th:value="${placeList.placeTitle}">
+
+
+		
+	</div>
+	
+	<button class="recomaned-text"> <a href="#place-name.">맨위로 </a> </button>
+	
+	
+	
+	
+	<div th:replace="~{layouts/main/footer :: footerFragment}"></div>
+
+
+</body>
+<script th:inline="javascript">
+var isSaved = false;
+
+function scrapPlace() {
+    // 이미 찜한 경우에는 저장을 막음
+    if (isSaved) {
+        alert("이미 찜한 상태입니다.");
+        return;
+    }
+
+    // place_title 값 가져오기  
+    var placeTitle = /*[[${placeList.placeTitle}]]*/"";
+
+    // 세션에서 user_id 가져오기
+
+    // Ajax 요청 보내기
+    $.ajax({
+        url: '/api/scrap',
+        type: 'POST',
+        data: {
+            placeTitle: placeTitle,
+        },
+        success: function(response) {
+            console.log('찜하기 성공');
+            alert("찜하기 성공!!");
+            // 저장 상태를 표시하기 위해 플래그 변수를 변경
+            isSaved = true;
+        },
+        error: function(xhr, status, error) {
+            console.log('찜하기 실패');
+            // 실패 처리
+            if (xhr.status >= 500) {
+                // 서버 오류가 발생한 경우
+                var confirmLogin = confirm('로그인이 필요합니다. 로그인 페이지로 이동하시겠습니까?');
+                if (confirmLogin) {
+                    // 로그인 페이지로 이동하는 코드
+                    window.location.href = '/user/login';
+                } else {
+                    // 취소 버튼을 누른 경우
+                    console.log('로그인이 취소되었습니다.');
+                }
+            }
+        }
+    });
+}
+
+	//이건 답글달때 기능
+	$(document)
+			.ready(
+					function() {
+						// 페이지 로드 시 댓글 목록을 가져옴
+						loadComments();
+
+			$('#commentForm')
+					.submit(
+							function(event) {
+								event.preventDefault(); // 폼의 기본 동작인 페이지 이동을 막음
+								
+								var placeTitle = $("#inputText").val(); // 장소 이름 변수 가져오기
+								var content = $('#content').val(); // 댓글 내용 가져오기
+								var userId = $('#inputText2').val(); // 
+
+								// Ajax 요청 보내기
+								$.ajax({
+										url : '/api/comments',
+										type : 'POST',
+										data : {
+											placeTitle : placeTitle,
+											reviewContent : content,
+											userId : userId
+										},
+										success : function(
+												response) {
+											console.log('댓글 작성 성공');
+
+												// 응답 데이터를 확인하여 처리
+												if (response === '댓글 작성 성공') {
+													// 성공적인 응답을 받았을 경우 처리할 내용
+													var commentElement = $('<div>').addClass('comment');
+													var contentElement = $('<p>').text('내용 : ' + content).addClass('content');
+													var userElement = $('<p>').text('작성자 : ' + userId).addClass('user');
+
+													commentElement.append(contentElement);
+													commentElement.append(userElement);
+
+													$('#commentList').append(commentElement);
+												} else {
+													// 응답이 다른 형식이거나 실패한 경우 처리할 내용
+													console.log('댓글 작성 실패 ');
+												}
+											},
+											error : function(xhr,status, error) {
+												console.log('댓글 작성 실패');
+												// 실패시 처리할 내용 추가
+												if (xhr.status >= 500) {
+													// 서버 오류가 발생한 경우
+													var confirmLogin = confirm('로그인이 필요합니다. 로그인 페이지로 이동하시겠습니까?');
+													if (confirmLogin) {
+														// 로그인 페이지로 이동하는 코드
+														window.location.href = '/user/login';
+													} else {
+														// 취소 버튼을 누른 경우
+														console.log('로그인이 취소되었습니다.');
+													}
+												}
+											}
+										});
+							});
+
+						//댓글 목록을 가져오는 함수
+						function loadComments() {
+							var placeTitle = $("#inputText").val(); // 장소 이름 변수 가져오기
+
+							$.ajax({
+								url : '/api/comments',
+								type : 'GET',
+								data : {
+									placeTitle : placeTitle
+								},
+								success : function(response) {
+									console.log('댓글 목록 가져오기 성공',
+											response);
+
+									// 응답 데이터를 처리하여 화면에 표시
+									if (Array.isArray(response)) {	
+										response.forEach(function(comment) {
+					
+											var commentElement = $('<div>').addClass('comment');
+											var contentElement = $('<p>').text(comment.reviewContent).addClass('content');
+											var userElement = $('<p>').text(comment.userId).addClass('user');
+
+											var contentElement = $('<p>').text('댓글 내용 : ' + comment.reviewContent + ' 작성자 : ' + comment.userId).addClass('content');
+															commentElement.append(contentElement);
+
+															$('#commentList').append(commentElement);
+												});
+									}
+								},
+										error : function(xhr, status, error) {
+											console.log('댓글 목록 가져오기 실패');
+											// 실패시 처리할 내용 추가
+										}
+									});
+						}
+					});
+</script>
+
+
+</html>

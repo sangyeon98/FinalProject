@@ -1,0 +1,58 @@
+<div class="container-fluid">
+
+<nav th:fragment="navbarFragment" class="navbar  d-flex justify-content-end">
+	
+	<!-- 세션에 로그인정보가 있으면 -->
+	<span th:if="${session.loggedInUser != null}">
+		<span th:text="${session.loggedInUser.userId} + ' 님 환영합니다'"></span>
+		<a href="/user/logout" class="text-black-50 fw-bold" style="text-decoration: none; margin-left: 10px;">로그아웃 &nbsp;&nbsp;</a>
+	</span>
+	<!-- 세션에 로그인 정보가 없으면 -->
+	<a th:if="${session.loggedInUser == null}" class="text-black-50 fw-bold" href="/user/login" style="text-decoration: none; margin-right: 30px;">LOGIN</a>
+</nav>
+
+<nav th:fragment="navbarFragment" class="navbar navbar-expand-lg">
+  <div class="container-fluid">
+    <a href="/"><img src="/images/logo.png" alt="로고" class="logo" style="width: 300px; height: 200;"></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div style="margin-top: 60px; margin-left: 400px;" class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <h5><a class="nav-link active text-black-50 fw-bold" href="/place/list2">PLACE</a></h5>
+        </li>
+        <li class="nav-item">
+          <h5><a class="nav-link active text-black-50 fw-bold" href="/course/list">COURSE</a></h5>
+        </li>
+		<li class="nav-item">
+          <h5><a class="nav-link active text-black-50 fw-bold" href="/koMap/koMap">MAP</a></h5>
+        </li>
+		<li class="nav-item">
+          <h5><a class="nav-link active text-black-50 fw-bold" href="/mypage/mypage">MYPAGE</a></h5>
+        </li>
+		<li class="nav-item">
+          <h5><a class="nav-link active text-black-50 fw-bold" href="/notice/list">NOTICE</a></h5>
+        </li>
+      </ul>
+      <form class="d-flex" role="search">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <button id="search" class="btn" style=" border-color: silver;" type="submit">Search</button>
+        
+        <script type="text/javascript">
+        
+			window.onload = function(){
+			    document.getElementById("search").onclick = function(){
+			        window.open("/search","","width=700px,height=500px,top=200px,left=200px;");
+			    }
+			};
+		</script>
+      </form>
+    </div>
+  </div>
+  <!-- 부트스트랩 JavaScript 파일 추가 -->
+  	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/js/bootstrap.bundle.min.js"></script>
+</nav>
+
+
+</div>

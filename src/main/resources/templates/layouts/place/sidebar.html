@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Sidebar Example</title>
+<style>
+/* 사이드바 스타일 */
+.sidebar {
+	width: 200px;
+	height: 100%;
+	background-color: #f1f1f1;
+	position: fixed;
+	left: 0;
+	top: 0;
+}
+
+/* 사이드바 항목 스타일 */
+.sidebar a {
+	display: block;
+	padding: 10px;
+	text-decoration: none;
+	color: #333;
+}
+
+/* 사이드바 항목 스타일 - 활성화된 항목 */
+.sidebar a.active {
+	background-color: #ddd;
+}
+</style>
+</head>
+<body>
+
+	<div th:fragment="sidebarFragment" class="bg-light border-right"
+		id="sidebar-wrapper">
+		<!-- <div class="sidebar-heading">여행 지역</div> -->
+
+		<div class="sidebar" style="float: left; font-weight: bold;">
+			<ul class="list-group list-group-flush" >
+				<li>
+					<a th:href="@{/place/list2}"
+					th:text="'전체'"
+					class="list-group-item list-group-item-action bg-light">
+					</a>
+				</li>
+					
+				<li th:each="city : ${result.dtoCityList}">
+				<a th:href="@{/place/list3(cityName = ${city.cityName},
+                       
+                       type=${pageRequestDTO.type} ,
+                       keyword = ${pageRequestDTO.keyword})}"
+					th:text="${city.cityName}"
+					class="list-group-item list-group-item-action bg-light"></a></li>
+				<li><a class="list-group-item list-group-item-action bg-light" href="/notice/list">고객센터</a>
+				</li>
+				<!-- page= ${result.page}, -->
+			</ul>
+		</div>
+
+
+
+		<!-- <div class="sidebar">
+			<a href="/전체">전체</a> <a href="/서울">서울</a> <a href="/경기도">경기도</a> <a
+				href="/강원도">강원도</a> <a href="/경상도">경상도</a>
+		</div> -->
+
+		<!-- 본문 내용 -->
+		<!-- <div style="margin-left: 200px;">
+			<h1>사이드바 예시</h1>
+			<p>본문 내용을 여기에 작성하세요.</p>
+		</div> -->
+</body>
+</html>

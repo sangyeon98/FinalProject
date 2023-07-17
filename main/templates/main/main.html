@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EZEN TRIP</title>
+<!-- 부트스트랩 CSS 링크 -->
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
+	crossorigin="anonymous">
+	
+</head>
+<body style="background-image: url('/images/배경2.jpg'); background-size: cover; background-repeat: no-repeat; background-position: center;"> <!--  -->
+	<!-- 네비게이션 바 -->
+	<nav th:replace="~{layouts/main/navbar :: navbarFragment}"></nav>
+	<br>
+		<!-- 이미지슬라이드+동영상 -->
+		<div th:replace="~{layouts/main/grid :: gridFragment}"></div>
+	<br><br>
+	<br><br>
+		<!-- 이벤트 -->
+		<div th:replace="~{layouts/main/event :: eventFragment}"></div>
+	<br><br>
+	
+	<br><br><br><br><br><br>
+	<!-- 광고베너 -->
+	<div class="row text-center">
+		<div class="col-sm-4">
+			<img src="/images/배너/식중독예방.jpg" class="img-fluid">
+		</div>
+		<div class="col-sm-4">
+			<img src="/images/배너/배너.jpg" class="img-fluid">
+		</div>
+		<div class="col-sm-4">
+			<img src="/images/배너/배너2.jpg" class="img-fluid">
+		</div>
+	</div>
+	
+	<br><br>
+	
+	<!-- 푸터 -->
+	<div th:replace="~{layouts/main/footer :: footerFragment}"></div>
+	
+
+	<!-- 부트스트랩 JavaScript 파일 추가 -->
+  	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/js/bootstrap.bundle.min.js"></script>
+  	
+  	<!-- 스크롤탑 -->
+	<div th:replace="~{layouts/main/scrolltop :: scrolltopFragment}"></div>
+  	
+</body>
+</html>

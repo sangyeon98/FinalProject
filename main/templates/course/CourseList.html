@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EZEN TRIP</title>
+<style>
+@import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
+
+#scrollToTopButton {
+	position: fixed;
+	bottom: 20px;
+	right: 20px;
+	width: 50px;
+	height: 50px;
+	border: none;
+	border-radius: 50%;
+	background-color: #f4f6f8;
+	cursor: pointer;
+	display: none;
+}
+
+#scrollToTopButton img {
+	width: 50%;
+	height: 50%;
+}
+
+#scrollToTopButton.show {
+	display: block;
+}
+
+#header {
+	background-color: white;
+	width: 1200px;
+	height: 300px;
+}
+
+#content {
+	background-color: white;
+	float: left;
+	white-space: nowrap;
+	margin-left: 40px;
+	width: 700px;
+	height: 850px;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+}
+
+#wrapper {
+	background: #f4f6f8;
+	width: 900px;
+	margin: 0 auto;
+}
+
+.course {
+	display: flex;
+	align-items: center;
+	margin-bottom: 20px;
+	width: 100%;
+}
+
+.course .image {
+	margin-right: 10px;
+}
+
+.course .image img {
+	width: 140px;
+	height: 94px;
+	border-radius: 10px;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.course .details {
+	float: center;
+	width: 800px;
+	font-family: 'Noto Sans KR';
+}
+
+.course .details a {
+	font-weight: bold;
+	color: #333;
+	text-decoration: none;
+}
+
+.course .details p {
+	margin-top: 10px;
+	font-size: 14px;
+	color: #777;
+}
+
+.course .details a:hover {
+	opacity: 0.4;
+	color: blue;
+}
+
+.course .number {
+	font-size: 16px;
+	font-weight: bold;
+}
+
+.course .title {
+	font-size: 15px;
+	color: #777;
+	margin-top: 5px;
+}
+
+.course-container {
+	display: flex;
+	flex-wrap: wrap;
+	float: center;
+	width: 35%;
+	font-family: 'Noto Sans KR';
+}
+
+.course-container img {
+	width: 140px;
+	height: 95px;
+}
+
+.sidebar {
+	background-color: #DCDCDC;
+	opacity: 0.4;
+	width: 140px;
+	height: 480px;
+	float: left;
+	font-weight: bold;
+	text-align: center;
+	padding: 20px;
+	box-sizing: border-box;
+}
+
+.sidebar ul {
+	list-style: none;
+	padding: 0;
+	margin: 20px 0;
+}
+
+.sidebar ul li {
+	padding: 10px;
+}
+
+.sidebar a {
+	color: #333;
+	text-decoration: none;
+	font-size: 15px;
+	font-family: 'Noto Sans KR';
+}
+
+.sidebar a:hover {
+	color: blue;
+}
+
+.image-container {
+	display: flex;
+}
+
+.region {
+	display: flex;
+	font-family: 'Noto Sans KR';
+	font-weight: normal;
+	font-style: normal;
+	font-size: 14px;
+	flex-direction: column;
+	opacity: 0.75;
+	align-items: center;
+	margin-right: 20px;
+	border-radius: 10px;
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 4px 8px rgba(0, 0, 0, 0.2);
+	padding: 20px;
+	transition: transform 0.3s ease;
+	background-color: white;
+	border: 2px solid transparent;
+}
+
+.region:hover {
+	transform: translateY(-25px);
+	box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15), 0 8px 16px
+		rgba(0, 0, 0, 0.3);
+	border-color: #dcdcdc;
+}
+
+.region p {
+	font-size: 19px;
+	color: #333;
+	margin-top: 18px;
+	text-align: center;
+	letter-spacing: 1px;
+	font-weight: 600;
+}
+
+.region img {
+	width: 200px;
+	height: 150px;
+	object-fit: cover;
+	border-radius: 10px;
+}
+
+.icon-container {
+	display: flex;
+	align-items: center;
+}
+
+.scrap-text {
+	margin-left: 5px;
+	font-family: 'Noto Sans KR';
+}
+</style>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
+	crossorigin="anonymous">
+
+</head>
+<body
+	style="background-size: cover; background-repeat: no-repeat; backgrousnd-position: center;">
+	<!--  -->
+	<!-- 네비게이션 바 -->
+	<nav th:replace="~{layouts/main/navbar :: navbarFragment}"></nav>
+	<br>
+<body>
+	<br>
+	<h4 style="padding-left: 140px; font-family: 'SEBANG_Gothic_Bold'; text-align: center; font-weight: bold;">추천여행지</h4>
+	<br>
+	<div id="wrapper">
+		<div id="header">
+			<div class="image-container">
+				<div class="region">
+					<img src="/course/경복궁.png" alt="경복궁">
+				</div>
+				<div class="region">
+					<img src="/course/양평들꽃수목원.jpg" alt="양평들꽃수목원">
+				</div>
+				<div class="region">
+					<img src="/course/봉래폭포.jpg" alt="봉래폭포">
+				</div>
+				<div class="region">
+					<img src="/course/석굴암.jpg" alt="석굴암">
+				</div>
+			</div>
+		</div>
+		<div class="sidebar">
+			<ul>
+				<li><a href="#" data-region="전체" onclick="filterByRegion('전체')">전체</a></li>
+				<li><a href="#" data-region="서울시"
+					onclick="filterByRegion('서울시')">서울시</a></li>
+				<li><a href="#" data-region="인천광역시"
+					onclick="filterByRegion('인천광역시')">인천광역시</a></li>
+				<li><a href="#" data-region="경기도"
+					onclick="filterByRegion('경기도')">경기도</a></li>
+				<li><a href="#" data-region="강원도"
+					onclick="filterByRegion('강원도')">강원도</a></li>
+				<li><a href="#" data-region="충청도"
+					onclick="filterByRegion('충청도')">충청도</a></li>
+				<li><a href="#" data-region="전라도"
+					onclick="filterByRegion('전라도')">전라도</a></li>
+				<li><a href="#" data-region="경상도"
+					onclick="filterByRegion('경상도')">경상도</a></li>
+				<li><a href="#" data-region="제주도"
+					onclick="filterByRegion('제주도')">제주도</a></li>
+			</ul>
+		</div>
+		<div id="content">
+    <div class="course-container">
+        <div class="course" th:each="course, courseStat : ${courseList}" th:if="${courseStat.index == 0 or course.courseTitle != courseList[courseStat.index - 1].courseTitle}">
+            <div class="image">
+                <img th:src="@{'/images/ima/' + ${course.place.city.cityName} + '/' + ${course.place.placeTitle} + ' (1).jpg'}">
+            </div>
+            <div class="details">
+                <a th:text="${course.courseTitle}" th:href="@{/course/findByTitle(courseTitle=${course.courseTitle})}"></a>
+                <p th:text="${course.place.city.cityName}"></p>
+                <img class="scrap-icon" src="/course/heart.png" alt="스크랩" style="width: 15px; height: 15px;">
+                <span class="scrap-text">스크랩</span>
+                <input type="hidden" name="courseNo" th:value="${course.courseNo}">
+            </div>
+        </div>
+    </div>
+</div>
+	<button id="scrollToTopButton" onclick="scrollToTop()" title="위로">
+		<img src="/course/up.png" alt="위로">
+	</button>
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<script>
+		// 스크롤 이벤트를 감지하여 버튼을 표시 또는 숨김
+		window.addEventListener('scroll', function() {
+			var scrollToTopButton = document
+					.getElementById('scrollToTopButton');
+			if (window.scrollY > 500) {
+				scrollToTopButton.classList.add('show');
+			} else {
+				scrollToTopButton.classList.remove('show');
+			}
+		});
+
+		// 페이지 상단으로 부드럽게 스크롤링하는 함수
+		function scrollToTop() {
+			window.scrollTo({
+				top : 0,
+				behavior : 'smooth'
+			});
+		}
+
+		$(document).ready(function() {
+		    // 코스 스크랩
+		    $(".scrap-icon").on("click", function() {
+		    	var courseNo = $('input[name=courseNo]').val();
+		    	
+		        // 회원 인증 여부 확인
+		        var userId = "${loggedInUser.userId}";
+		        var isAuthenticated = false; // 초기값은 로그아웃 상태로 설정
+
+		        // 세션에 로그인 정보가 있는지 확인
+		        if ("${session.loggedInUser}" !== "") {
+		            isAuthenticated = true; // 세션에 로그인 정보가 있으면 로그인 상태로 설정
+		        }
+
+		        if (isAuthenticated) {
+		        	var data = {
+		        	        "courseNo": courseNo,
+		        	        "userId": userId
+		        	    };
+
+		            $.ajax({
+		                type: "POST",
+		                url: "/course/scrap/" + courseNo,
+		                data: JSON,
+		                contentType: "application/json",
+		                success: function(response) {
+		                    alert("코스를 스크랩하였습니다.");
+		                },
+		                error: function(xhr, status, error) {
+		                    alert("코스 스크랩에 실패하였습니다.");
+		                    console.log(xhr.responseText);
+		                }
+		            });
+		        } else {
+		            alert("로그인이 필요합니다.");
+		        }
+		    });
+		});
+
+		// 현재 표시된 이미지 인덱스
+		let currentIndex = 0;
+
+		// 이미지 배열
+		const images = [ "/course/경복궁.png", "/course/봉래폭포.jpg",
+						"/course/양평들꽃수목원.jpg", "/course/석굴암.jpg",
+						"/course/금산 하늘물빛정원.jpg", "/course/레고랜드.png",
+						"/course/송정 해수욕장.jpg", "/course/제천 배론성지.jpg", ];
+
+		// 이미지 표시 함수
+		function displayImages() {
+			const imageContainer = document.querySelector(".image-container");
+			imageContainer.innerHTML = "";
+
+			for (let i = currentIndex; i < currentIndex + 4; i++) {
+				const imageSrc = images[i];
+				const regionName = getRegionName(imageSrc);
+
+				const regionElement = document.createElement("div");
+				regionElement.classList.add("region");
+
+				const img = document.createElement("img");
+				img.src = imageSrc;
+				img.alt = regionName;
+
+				const p = document.createElement("p");
+				p.textContent = regionName;
+
+				regionElement.appendChild(img);
+				regionElement.appendChild(p);
+
+				imageContainer.appendChild(regionElement);
+			}
+		}
+
+		// 이미지 표시 및 스타일 적용
+		displayImages();
+
+		// 이미지 경로에서 지역 이름 추출 함수
+		function getRegionName(imageSrc) {
+			const fileName = imageSrc.match(/\/([^/]+)\.\w+$/)[1];
+			const regionName = fileName.replace(/[0-9]/g, "");
+			return regionName.trim();
+		}
+
+		// 이전 이미지 보기 함수
+		function showPreviousImages() {
+			currentIndex -= 4;
+			if (currentIndex < 0) {
+				currentIndex = Math.max(images.length - 4, 0);
+			}
+			displayImages();
+		}
+
+		// 다음 이미지 보기 함수
+		function showNextImages() {
+			currentIndex += 4;
+			if (currentIndex >= images.length) {
+				currentIndex = 0;
+			}
+			displayImages();
+		}
+
+			    // 자동 슬라이드 함수
+		    function startAutoSlide() {
+		      setInterval(() => {
+		        currentIndex += 4;
+		        if (currentIndex >= images.length) {
+		          currentIndex = 0;
+		        }
+		        displayImages();
+		      }, 3000); // 이미지 변경
+		    } 
+
+		// 페이지 로드 시 이미지 표시 및 자동 슬라이드 시작
+		displayImages();
+		startAutoSlide();
+
+		function showCourse(courseTitle) {
+			window.location.href = '/course/detail?courseTitle=' + courseTitle;
+		}
+
+		// 코스 목록 업데이트
+		function updateCourseList(courses) {
+			var courseContainer = $(".course-container");
+			courseContainer.empty();
+
+			$.each(courses, function(index, course) {
+				var image = $("<div>").addClass("image").append(
+						$("<img>").attr("src", course.imageUrl));
+
+				var details = $("<div>").addClass("details");
+				var title = $("<a>")
+						.attr("href",
+								"/course/findByTitle?courseTitle="
+								+ course.courseTitle).text(course.courseTitle);
+				var cityName = $("<p>").text(course.place.city.cityName);
+
+				details.append(title, cityName);
+
+				var courseElement = $("<div>").addClass("course").append(image,details);
+
+				courseContainer.append(courseElement);
+			});
+		}
+
+		$(document).ready(function() {
+			// 사이드바의 링크 클릭 이벤트 처리
+			$(".sidebar a").on("click", function(e) {
+				e.preventDefault();
+
+				var region = $(this).text(); // 클릭된 링크의 텍스트를 가져옴
+
+				// 서버에 지역 데이터 요청
+				$.ajax({
+					type : "GET",
+					url : "/course/filterByRegion",
+					data : { region : region },
+					success : function(response) {
+						// 응답받은 데이터로 코스 목록 업데이트
+						updateCourseList(response);
+					},
+					error : function(xhr, status, error) {
+						console.log(xhr.responseText);
+					}
+				});
+			});
+		});
+		
+		function filterByRegion(region) {
+			var courses = $(".course");
+			courses.hide(); // 모든 코스를 숨김
+
+			courses.each(function() {
+				var city = $(this).find(".details p").text();
+				if (region === "전체" || city === region) {
+					$(this).show(); // 선택한 지역과 일치하는 코스를 보이도록 함
+				}
+			});
+		}
+	</script>
+</body>
+</html>
